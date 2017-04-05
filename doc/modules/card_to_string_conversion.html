@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><strong>card_to_string_conversion</strong></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>card_to_string_conversion</code></h1>
+<p>Converts between string and numeric representations of cards.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#card_to_suit">card_to_suit (card)</a></td>
+	<td class="summary">Gets the suit of a card.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#card_to_rank">card_to_rank (card)</a></td>
+	<td class="summary">Gets the rank of a card.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#card_to_string">card_to_string (card)</a></td>
+	<td class="summary">Converts a card's numeric representation to its string representation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#cards_to_string">cards_to_string (cards)</a></td>
+	<td class="summary">Converts several cards' numeric representations to their string
+ representations.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#string_to_card">string_to_card (card_string)</a></td>
+	<td class="summary">Converts a card's string representation to its numeric representation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#string_to_board">string_to_board (card_string)</a></td>
+	<td class="summary">Converts a string representing zero or one board cards to a
+ vector of numeric representations.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#suit_table">suit_table</a></td>
+	<td class="summary">All possible card suits - only the first 2 are used in Leduc Hold'em.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rank_table">rank_table</a></td>
+	<td class="summary">All possible card ranks - only the first 3-4 are used in Leduc Hold'em and
+ variants.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#card_to_string_table">card_to_string_table</a></td>
+	<td class="summary">Holds the string representation for every possible card, indexed by its
+ numeric representation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#string_to_card_table">string_to_card_table</a></td>
+	<td class="summary">Holds the numeric representation for every possible card, indexed by its
+ string representation.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "card_to_suit"></a>
+    <strong>card_to_suit (card)</strong>
+    </dt>
+    <dd>
+    Gets the suit of a card.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">card</span>
+         the numeric representation of the card
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the index of the suit
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "card_to_rank"></a>
+    <strong>card_to_rank (card)</strong>
+    </dt>
+    <dd>
+    Gets the rank of a card.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">card</span>
+         the numeric representation of the card
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the index of the rank
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "card_to_string"></a>
+    <strong>card_to_string (card)</strong>
+    </dt>
+    <dd>
+    Converts a card's numeric representation to its string representation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">card</span>
+         the numeric representation of a card
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the string representation of the card
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "cards_to_string"></a>
+    <strong>cards_to_string (cards)</strong>
+    </dt>
+    <dd>
+    Converts several cards' numeric representations to their string
+ representations.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cards</span>
+         a vector of numeric representations of cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a string containing each card's string representation, concatenated
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "string_to_card"></a>
+    <strong>string_to_card (card_string)</strong>
+    </dt>
+    <dd>
+    Converts a card's string representation to its numeric representation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">card_string</span>
+         the string representation of a card
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the numeric representation of the card
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "string_to_board"></a>
+    <strong>string_to_board (card_string)</strong>
+    </dt>
+    <dd>
+    Converts a string representing zero or one board cards to a
+ vector of numeric representations.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">card_string</span>
+         either the empty string or a string representation of a
+ card
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        either an empty tensor or a tensor containing the numeric
+ representation of the card
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "suit_table"></a>
+    <strong>suit_table</strong>
+    </dt>
+    <dd>
+    All possible card suits - only the first 2 are used in Leduc Hold'em.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">h</span>
+
+
+
+        </li>
+        <li><span class="parameter">s</span>
+
+
+
+        </li>
+        <li><span class="parameter">c</span>
+
+
+
+        </li>
+        <li><span class="parameter">d</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "rank_table"></a>
+    <strong>rank_table</strong>
+    </dt>
+    <dd>
+    All possible card ranks - only the first 3-4 are used in Leduc Hold'em and
+ variants.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">A</span>
+
+
+
+        </li>
+        <li><span class="parameter">K</span>
+
+
+
+        </li>
+        <li><span class="parameter">Q</span>
+
+
+
+        </li>
+        <li><span class="parameter">J</span>
+
+
+
+        </li>
+        <li><span class="parameter">T</span>
+
+
+
+        </li>
+        <li><span class="parameter">9</span>
+
+
+
+        </li>
+        <li><span class="parameter">8</span>
+
+
+
+        </li>
+        <li><span class="parameter">7</span>
+
+
+
+        </li>
+        <li><span class="parameter">6</span>
+
+
+
+        </li>
+        <li><span class="parameter">5</span>
+
+
+
+        </li>
+        <li><span class="parameter">4</span>
+
+
+
+        </li>
+        <li><span class="parameter">3</span>
+
+
+
+        </li>
+        <li><span class="parameter">2</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "card_to_string_table"></a>
+    <strong>card_to_string_table</strong>
+    </dt>
+    <dd>
+    Holds the string representation for every possible card, indexed by its
+ numeric representation.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "string_to_card_table"></a>
+    <strong>string_to_card_table</strong>
+    </dt>
+    <dd>
+    Holds the numeric representation for every possible card, indexed by its
+ string representation.
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

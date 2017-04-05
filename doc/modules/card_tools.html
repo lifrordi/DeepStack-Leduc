@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><strong>card_tools</strong></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>card_tools</code></h1>
+<p>A set of tools for basic operations on cards and sets of cards.</p>
+<p> Several of the functions deal with "range vectors", which are probability
+ vectors over the set of possible private hands. For Leduc Hold'em,
+ each private hand consists of one card.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#hand_is_possible">hand_is_possible (hand)</a></td>
+	<td class="summary">Gives whether a set of cards is valid.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_possible_hand_indexes">get_possible_hand_indexes (board)</a></td>
+	<td class="summary">Gives the private hands which are valid with a given board.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_impossible_hand_indexes">get_impossible_hand_indexes (board)</a></td>
+	<td class="summary">Gives the private hands which are invalid with a given board.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_uniform_range">get_uniform_range (board)</a></td>
+	<td class="summary">Gives a range vector that has uniform probability on each hand which is
+ valid with a given board.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_random_range">get_random_range (board[, seed])</a></td>
+	<td class="summary">Randomly samples a range vector which is valid with a given board.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_valid_range">is_valid_range (range, board)</a></td>
+	<td class="summary">Checks if a range vector is valid with a given board.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#board_to_street">board_to_street (board)</a></td>
+	<td class="summary">Gives the current betting round based on a board vector.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_second_round_boards">get_second_round_boards ()</a></td>
+	<td class="summary">Gives all possible sets of board cards for the game.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_boards_count">get_boards_count ()</a></td>
+	<td class="summary">Gives the number of possible boards.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_board_index">get_board_index (board)</a></td>
+	<td class="summary">Gives a numerical index for a set of board cards.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#normalize_range">normalize_range (board, range)</a></td>
+	<td class="summary">Normalizes a range vector over hands which are valid with a given board.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "hand_is_possible"></a>
+    <strong>hand_is_possible (hand)</strong>
+    </dt>
+    <dd>
+    Gives whether a set of cards is valid.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">hand</span>
+         a vector of cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        <code>true</code> if the tensor contains valid cards and no card is repeated
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_possible_hand_indexes"></a>
+    <strong>get_possible_hand_indexes (board)</strong>
+    </dt>
+    <dd>
+    Gives the private hands which are valid with a given board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a vector with an entry for every possible hand (private card), which
+  is <code>1</code> if the hand shares no cards with the board and <code>0</code> otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_impossible_hand_indexes"></a>
+    <strong>get_impossible_hand_indexes (board)</strong>
+    </dt>
+    <dd>
+    Gives the private hands which are invalid with a given board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a vector with an entry for every possible hand (private card), which
+ is <code>1</code> if the hand shares at least one card with the board and <code>0</code> otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_uniform_range"></a>
+    <strong>get_uniform_range (board)</strong>
+    </dt>
+    <dd>
+    Gives a range vector that has uniform probability on each hand which is
+ valid with a given board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a range vector where invalid hands have 0 probability and valid
+ hands have uniform probability
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_random_range"></a>
+    <strong>get_random_range (board[, seed])</strong>
+    </dt>
+    <dd>
+    Randomly samples a range vector which is valid with a given board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+        <li><span class="parameter">seed</span>
+         a seed for the random number generator
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         a range vector where invalid hands are given 0 probability, each
+ valid hand is given a probability randomly sampled from the uniform
+ distribution on [0,1), and the resulting range is normalized
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_valid_range"></a>
+    <strong>is_valid_range (range, board)</strong>
+    </dt>
+    <dd>
+    Checks if a range vector is valid with a given board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">range</span>
+         a range vector to check
+        </li>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        <code>true</code> if the range puts 0 probability on invalid hands and has
+ total probability 1
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "board_to_street"></a>
+    <strong>board_to_street (board)</strong>
+    </dt>
+    <dd>
+    Gives the current betting round based on a board vector.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the current betting round
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_second_round_boards"></a>
+    <strong>get_second_round_boards ()</strong>
+    </dt>
+    <dd>
+    Gives all possible sets of board cards for the game.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        an NxK tensor, where N is the number of possible boards, and K is
+ the number of cards on each board
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_boards_count"></a>
+    <strong>get_boards_count ()</strong>
+    </dt>
+    <dd>
+    Gives the number of possible boards.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the number of possible boards
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_board_index"></a>
+    <strong>get_board_index (board)</strong>
+    </dt>
+    <dd>
+    Gives a numerical index for a set of board cards.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a non-empty vector of board cards
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the numerical index for the board
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "normalize_range"></a>
+    <strong>normalize_range (board, range)</strong>
+    </dt>
+    <dd>
+    Normalizes a range vector over hands which are valid with a given board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+        <li><span class="parameter">range</span>
+         a range vector
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a modified version of <code>range</code> where each invalid hand is given 0
+ probability and the vector is normalized
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

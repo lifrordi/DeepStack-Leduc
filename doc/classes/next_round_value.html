@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><strong>next_round_value</strong></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>next_round_value</code></h1>
+<p>Uses the neural net to estimate value at the end of the first betting round.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#NextRoundValue:__init">NextRoundValue:__init (nn)</a></td>
+	<td class="summary">Constructor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NextRoundValue:start_computation">NextRoundValue:start_computation (pot_sizes)</a></td>
+	<td class="summary">Initializes the value calculator with the pot size of each state that
+ we are going to evaluate.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NextRoundValue:get_value">NextRoundValue:get_value (ranges, values)</a></td>
+	<td class="summary">Gives the predicted counterfactual values at each evaluated state, given
+ input ranges.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NextRoundValue:get_value_on_board">NextRoundValue:get_value_on_board (board, values)</a></td>
+	<td class="summary">Gives the average counterfactual values on the given board across previous
+ calls to <a href="../classes/next_round_value.html#NextRoundValue:get_value">get_value</a>.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "NextRoundValue:__init"></a>
+    <strong>NextRoundValue:__init (nn)</strong>
+    </dt>
+    <dd>
+    Constructor. </p>
+
+<p> Creates a tensor that can translate hand ranges to bucket ranges
+ on any board.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">nn</span>
+         the neural network
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NextRoundValue:start_computation"></a>
+    <strong>NextRoundValue:start_computation (pot_sizes)</strong>
+    </dt>
+    <dd>
+    Initializes the value calculator with the pot size of each state that
+ we are going to evaluate. </p>
+
+<p> During continual re-solving, there is one pot size for each initial state
+ of the second betting round (before board cards are dealt).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">pot_sizes</span>
+         a vector of pot sizes
+ betting round ends
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NextRoundValue:get_value"></a>
+    <strong>NextRoundValue:get_value (ranges, values)</strong>
+    </dt>
+    <dd>
+    Gives the predicted counterfactual values at each evaluated state, given
+ input ranges. </p>
+
+<p> <a href="../classes/next_round_value.html#NextRoundValue:start_computation">start_computation</a> must be called first. Each state to be evaluated must
+ be given in the same order that pot sizes were given for that function.
+ Keeps track of iterations internally, so should be called exactly once for
+ every iteration of continual re-solving.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ranges</span>
+         An Nx2xK tensor, where N is the number of states evaluated
+ (must match input to <a href="../classes/next_round_value.html#NextRoundValue:start_computation">start_computation</a>), 2 is the number of players, and
+ K is the number of private hands. Contains N sets of 2 range vectors.
+        </li>
+        <li><span class="parameter">values</span>
+         an Nx2xK tensor in which to store the N sets of 2 value vectors
+ which are output
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NextRoundValue:get_value_on_board"></a>
+    <strong>NextRoundValue:get_value_on_board (board, values)</strong>
+    </dt>
+    <dd>
+    Gives the average counterfactual values on the given board across previous
+ calls to <a href="../classes/next_round_value.html#NextRoundValue:get_value">get_value</a>. </p>
+
+<p> Used to update opponent counterfactual values during re-solving after board
+ cards are dealt.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a non-empty vector of board cards
+        </li>
+        <li><span class="parameter">values</span>
+         a tensor in which to store the values
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

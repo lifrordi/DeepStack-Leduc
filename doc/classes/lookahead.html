@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><strong>lookahead</strong></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>lookahead</code></h1>
+<p>A depth-limited lookahead of the game tree used for re-solving.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Lookahead:__init">Lookahead:__init ()</a></td>
+	<td class="summary">Constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lookahead:build_lookahead">Lookahead:build_lookahead (tree)</a></td>
+	<td class="summary">Constructs the lookahead from a game's public tree.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lookahead:resolve_first_node">Lookahead:resolve_first_node (player_range, opponent_range)</a></td>
+	<td class="summary">Re-solves the lookahead using input ranges.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lookahead:resolve">Lookahead:resolve (player_range, opponent_cfvs)</a></td>
+	<td class="summary">Re-solves the lookahead using an input range for the player and
+ the <a href="../classes/cfrd_gadget.html#">CFRDGadget</a> to generate ranges for the opponent.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lookahead:get_chance_action_cfv">Lookahead:get_chance_action_cfv (action_index, board)</a></td>
+	<td class="summary">Gives the average counterfactual values for the opponent during re-solving
+ after a chance event (the betting round changes and more cards are dealt).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lookahead:get_results">Lookahead:get_results ()</a></td>
+	<td class="summary">Gets the results of re-solving the lookahead.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Lookahead:__init"></a>
+    <strong>Lookahead:__init ()</strong>
+    </dt>
+    <dd>
+    Constructor
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lookahead:build_lookahead"></a>
+    <strong>Lookahead:build_lookahead (tree)</strong>
+    </dt>
+    <dd>
+    Constructs the lookahead from a game's public tree. </p>
+
+<p> Must be called to initialize the lookahead.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tree</span>
+         a public tree
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lookahead:resolve_first_node"></a>
+    <strong>Lookahead:resolve_first_node (player_range, opponent_range)</strong>
+    </dt>
+    <dd>
+    Re-solves the lookahead using input ranges. </p>
+
+<p> Uses the input range for the opponent instead of a gadget range, so only
+ appropriate for re-solving the root node of the game tree (where ranges
+ are fixed).</p>
+
+<p> <a href="../classes/lookahead.html#Lookahead:build_lookahead">build_lookahead</a> must be called first.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">player_range</span>
+         a range vector for the re-solving player
+        </li>
+        <li><span class="parameter">opponent_range</span>
+         a range vector for the opponent
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lookahead:resolve"></a>
+    <strong>Lookahead:resolve (player_range, opponent_cfvs)</strong>
+    </dt>
+    <dd>
+    Re-solves the lookahead using an input range for the player and
+ the <a href="../classes/cfrd_gadget.html#">CFRDGadget</a> to generate ranges for the opponent. </p>
+
+<p> <a href="../classes/lookahead.html#Lookahead:build_lookahead">build_lookahead</a> must be called first.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">player_range</span>
+         a range vector for the re-solving player
+        </li>
+        <li><span class="parameter">opponent_cfvs</span>
+         a vector of cfvs achieved by the opponent
+ before re-solving
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lookahead:get_chance_action_cfv"></a>
+    <strong>Lookahead:get_chance_action_cfv (action_index, board)</strong>
+    </dt>
+    <dd>
+    Gives the average counterfactual values for the opponent during re-solving
+ after a chance event (the betting round changes and more cards are dealt). </p>
+
+<p> Used during continual re-solving to track opponent cfvs. The lookahead must
+ first be re-solved with <a href="../classes/lookahead.html#Lookahead:resolve">resolve</a> or <a href="../classes/lookahead.html#Lookahead:resolve_first_node">resolve_first_node</a>.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">action_index</span>
+         the action taken by the re-solving player at the start
+ of the lookahead
+        </li>
+        <li><span class="parameter">board</span>
+         a tensor of board cards, updated by the chance event
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a vector of cfvs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lookahead:get_results"></a>
+    <strong>Lookahead:get_results ()</strong>
+    </dt>
+    <dd>
+    Gets the results of re-solving the lookahead. </p>
+
+<p> The lookahead must first be re-solved with <a href="../classes/lookahead.html#Lookahead:resolve">resolve</a> or
+ <a href="../classes/lookahead.html#Lookahead:resolve_first_node">resolve_first_node</a>.
+
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+
+<p> a table containing the fields:</p>
+
+<ul>
+    <li><p><code>strategy</code>: an AxK tensor containing the re-solve player's strategy at the
+    root of the lookahead, where A is the number of actions and K is the range size</p></li>
+    <li><p><code>achieved_cfvs</code>: a vector of the opponent's average counterfactual values at the
+    root of the lookahead</p></li>
+    <li><p><code>children_cfvs</code>: an AxK tensor of opponent average counterfactual values after
+    each action that the re-solve player can take at the root of the lookahead</p></li>
+</ul>
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

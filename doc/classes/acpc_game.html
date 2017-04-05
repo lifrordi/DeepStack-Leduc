@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>acpc_game</strong></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>acpc_game</code></h1>
+<p>Handles communication to and from DeepStack using the ACPC protocol.</p>
+<p> For details on the ACPC protocol, see
+ <a href="http://www.computerpokercompetition.org/downloads/documents/protocols/protocol.pdf">http://www.computerpokercompetition.org/downloads/documents/protocols/protocol.pdf</a>.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ACPCGame:__init">ACPCGame:__init ()</a></td>
+	<td class="summary">Constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ACPCGame:connect">ACPCGame:connect (server, port)</a></td>
+	<td class="summary">Connects to a specified ACPC server which acts as the dealer.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ACPCGame:get_next_situation">ACPCGame:get_next_situation ()</a></td>
+	<td class="summary">Receives and parses the next poker situation where DeepStack must act.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ACPCGame:play_action">ACPCGame:play_action (adviced_action)</a></td>
+	<td class="summary">Informs the server that DeepStack is playing a specified action.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ACPCGame:__init"></a>
+    <strong>ACPCGame:__init ()</strong>
+    </dt>
+    <dd>
+    Constructor
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ACPCGame:connect"></a>
+    <strong>ACPCGame:connect (server, port)</strong>
+    </dt>
+    <dd>
+    Connects to a specified ACPC server which acts as the dealer.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">server</span>
+         the server that sends states to DeepStack, which responds
+ with actions
+        </li>
+        <li><span class="parameter">port</span>
+         the port to connect on
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/network_communication.html#ACPCNetworkCommunication:connect">network_communication.connect</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "ACPCGame:get_next_situation"></a>
+    <strong>ACPCGame:get_next_situation ()</strong>
+    </dt>
+    <dd>
+    Receives and parses the next poker situation where DeepStack must act. </p>
+
+<p> Blocks until the server sends a situation where DeepStack acts.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        the parsed state representation of the poker situation (see
+ <a href="../classes/protocol_to_node.html#ACPCProtocolToNode:parse_state">protocol_to_node.parse_state</a>)</li>
+        <li>
+        a public tree node for the state (see
+ <a href="../classes/protocol_to_node.html#ACPCProtocolToNode:parsed_state_to_node">protocol_to_node.parsed_state_to_node</a>)</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ACPCGame:play_action"></a>
+    <strong>ACPCGame:play_action (adviced_action)</strong>
+    </dt>
+    <dd>
+    Informs the server that DeepStack is playing a specified action.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">adviced_action</span>
+
+<p> a table specifying the action chosen by Deepstack,
+ with the fields:</p>
+
+<ul>
+    <li><p><code>action</code>: an element of <a href="../modules/constants.html#acpc_actions">constants.acpc_actions</a></p></li>
+    <li><p><code>raise_amount</code>: the number of chips raised (if <code>action</code> is raise)</p></li>
+</ul>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

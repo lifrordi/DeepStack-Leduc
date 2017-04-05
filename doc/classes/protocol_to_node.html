@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><strong>protocol_to_node</strong></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>protocol_to_node</code></h1>
+<p>Converts between DeepStack's internal representation and the ACPC protocol
+ used to communicate with the dealer.</p>
+<p> For details on the ACPC protocol, see
+ <a href="http://www.computerpokercompetition.org/downloads/documents/protocols/protocol.pdf">http://www.computerpokercompetition.org/downloads/documents/protocols/protocol.pdf</a>.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ACPCProtocolToNode:_init">ACPCProtocolToNode:_init ()</a></td>
+	<td class="summary">Constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ACPCProtocolToNode:parse_state">ACPCProtocolToNode:parse_state (state)</a></td>
+	<td class="summary">Turns a string representation of a poker state into a table understandable
+ by DeepStack.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ACPCProtocolToNode:parsed_state_to_node">ACPCProtocolToNode:parsed_state_to_node (processed_state)</a></td>
+	<td class="summary">Gets a representation of the public tree node which corresponds to a
+ processed state.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ACPCProtocolToNode:action_to_message">ACPCProtocolToNode:action_to_message (last_message, adviced_action)</a></td>
+	<td class="summary">Generates a message to send to the ACPC protocol server, given DeepStack's
+ chosen action.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ACPCProtocolToNode:_init"></a>
+    <strong>ACPCProtocolToNode:_init ()</strong>
+    </dt>
+    <dd>
+    Constructor
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ACPCProtocolToNode:parse_state"></a>
+    <strong>ACPCProtocolToNode:parse_state (state)</strong>
+    </dt>
+    <dd>
+    Turns a string representation of a poker state into a table understandable
+ by DeepStack.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">state</span>
+         a string representation of a poker state, in ACPC format
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+
+<p> a table of state parameters, with the fields:</p>
+
+<ul>
+    <li><p><code>position</code>: which player DeepStack is (element of <a href="../modules/constants.html#players">constants.players</a>)</p></li>
+    <li><p><code>current_street</code>: the current betting round</p></li>
+    <li><p><code>actions</code>: a list of actions which reached the state, for each
+    betting round - each action is a table with fields:</p>
+
+    <ul>
+        <li><p><code>action</code>: an element of <a href="../modules/constants.html#acpc_actions">constants.acpc_actions</a></p></li>
+        <li><p><code>raise_amount</code>: the number of chips raised (if <code>action</code> is raise)</p></li>
+    </ul></li>
+    <li><p><code>actions_raw</code>: a string representation of actions for each betting round</p></li>
+    <li><p><code>all_actions</code>: a concatenated list of all of the actions in <code>actions</code>,
+    with the following fields added:</p>
+
+    <ul>
+        <li><p><code>player</code>: the player who made the action</p></li>
+        <li><p><code>street</code>: the betting round on which the action was taken</p></li>
+        <li><p><code>index</code>: the index of the action in <code>all_actions</code></p></li>
+    </ul></li>
+    <li><p><code>board</code>: a string representation of the board cards</p></li>
+    <li><p><code>hand_id</code>: a numerical id for the current hand</p></li>
+    <li><p><code>hand_string</code>: a string representation of DeepStack's private hand</p></li>
+    <li><p><code>hand_id</code>: a numerical representation of DeepStack's private hand</p></li>
+    <li><p><code>acting_player</code>: which player is acting (element of <a href="../modules/constants.html#players">constants.players</a>)</p></li>
+    <li><p><code>bet1</code>, <code>bet2</code>: the number of chips committed by each player</p></li>
+</ul>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ACPCProtocolToNode:parsed_state_to_node"></a>
+    <strong>ACPCProtocolToNode:parsed_state_to_node (processed_state)</strong>
+    </dt>
+    <dd>
+    Gets a representation of the public tree node which corresponds to a
+ processed state.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">processed_state</span>
+         a processed state representation returned by
+ <a href="../classes/protocol_to_node.html#ACPCProtocolToNode:parse_state">parse_state</a>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+
+<p> a table representing a public tree node, with the fields:</p>
+
+<ul>
+    <li><p><code>street</code>: the current betting round</p></li>
+    <li><p><code>board</code>: a (possibly empty) vector of board cards</p></li>
+    <li><p><code>current_player</code>: the currently acting player</p></li>
+    <li><p><code>bets</code>: a vector of chips committed by each player</p></li>
+</ul>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ACPCProtocolToNode:action_to_message"></a>
+    <strong>ACPCProtocolToNode:action_to_message (last_message, adviced_action)</strong>
+    </dt>
+    <dd>
+    Generates a message to send to the ACPC protocol server, given DeepStack's
+ chosen action.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">last_message</span>
+         the last state message sent by the server
+        </li>
+        <li><span class="parameter">adviced_action</span>
+
+<p> the action that DeepStack chooses to take, with fields</p>
+
+<ul>
+    <li><p><code>action</code>: an element of <a href="../modules/constants.html#acpc_actions">constants.acpc_actions</a></p></li>
+    <li><p><code>raise_amount</code>: the number of chips to raise (if <code>action</code> is raise)</p></li>
+</ul>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a string messsage in ACPC format to send to the server
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

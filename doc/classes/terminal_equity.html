@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><strong>terminal_equity</strong></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>terminal_equity</code></h1>
+<p>Evaluates player equities at terminal nodes of the game's public tree.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:__init">TerminalEquity:__init ()</a></td>
+	<td class="summary">Constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:set_board">TerminalEquity:set_board (board)</a></td>
+	<td class="summary">Sets the board cards for the evaluator and creates its internal data structures.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:call_value">TerminalEquity:call_value (ranges, result)</a></td>
+	<td class="summary">Computes (a batch of) counterfactual values that a player achieves at a terminal node
+ where no player has folded.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:fold_value">TerminalEquity:fold_value (ranges, result)</a></td>
+	<td class="summary">Computes (a batch of) counterfactual values that a player achieves at a terminal node
+ where a player has folded.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:get_call_matrix">TerminalEquity:get_call_matrix ()</a></td>
+	<td class="summary">Returns the matrix which gives showdown equity for any ranges.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:tree_node_call_value">TerminalEquity:tree_node_call_value (ranges, result)</a></td>
+	<td class="summary">Computes the counterfactual values that both players achieve at a terminal node
+ where no player has folded.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TerminalEquity:tree_node_fold_value">TerminalEquity:tree_node_fold_value (ranges, result, folding_player)</a></td>
+	<td class="summary">Computes the counterfactual values that both players achieve at a terminal node
+ where either player has folded.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "TerminalEquity:__init"></a>
+    <strong>TerminalEquity:__init ()</strong>
+    </dt>
+    <dd>
+    Constructor
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TerminalEquity:set_board"></a>
+    <strong>TerminalEquity:set_board (board)</strong>
+    </dt>
+    <dd>
+    Sets the board cards for the evaluator and creates its internal data structures.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a possibly empty vector of board cards
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TerminalEquity:call_value"></a>
+    <strong>TerminalEquity:call_value (ranges, result)</strong>
+    </dt>
+    <dd>
+    Computes (a batch of) counterfactual values that a player achieves at a terminal node
+ where no player has folded. </p>
+
+<p> <a href="../classes/terminal_equity.html#TerminalEquity:set_board">set_board</a> must be called before this function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ranges</span>
+         a batch of opponent ranges in an NxK tensor, where N is the batch size
+ and K is the range size
+        </li>
+        <li><span class="parameter">result</span>
+         a NxK tensor in which to save the cfvs
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TerminalEquity:fold_value"></a>
+    <strong>TerminalEquity:fold_value (ranges, result)</strong>
+    </dt>
+    <dd>
+    Computes (a batch of) counterfactual values that a player achieves at a terminal node
+ where a player has folded. </p>
+
+<p> <a href="../classes/terminal_equity.html#TerminalEquity:set_board">set_board</a> must be called before this function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ranges</span>
+         a batch of opponent ranges in an NxK tensor, where N is the batch size
+ and K is the range size
+        </li>
+        <li><span class="parameter">result</span>
+         A NxK tensor in which to save the cfvs. Positive cfvs are returned, and
+ must be negated if the player in question folded.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TerminalEquity:get_call_matrix"></a>
+    <strong>TerminalEquity:get_call_matrix ()</strong>
+    </dt>
+    <dd>
+    Returns the matrix which gives showdown equity for any ranges. </p>
+
+<p> <a href="../classes/terminal_equity.html#TerminalEquity:set_board">set_board</a> must be called before this function.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+         For nodes in the last betting round, the matrix <code>A</code> such that for player ranges
+ <code>x</code> and <code>y</code>, <code>x'Ay</code> is the equity for the first player when no player folds. For nodes
+ in the first betting round, the weighted average of all such possible matrices.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TerminalEquity:tree_node_call_value"></a>
+    <strong>TerminalEquity:tree_node_call_value (ranges, result)</strong>
+    </dt>
+    <dd>
+    Computes the counterfactual values that both players achieve at a terminal node
+ where no player has folded. </p>
+
+<p> <a href="../classes/terminal_equity.html#TerminalEquity:set_board">set_board</a> must be called before this function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ranges</span>
+         a 2xK tensor containing ranges for each player (where K is the range size)
+        </li>
+        <li><span class="parameter">result</span>
+         a 2xK tensor in which to store the cfvs for each player
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TerminalEquity:tree_node_fold_value"></a>
+    <strong>TerminalEquity:tree_node_fold_value (ranges, result, folding_player)</strong>
+    </dt>
+    <dd>
+    Computes the counterfactual values that both players achieve at a terminal node
+ where either player has folded. </p>
+
+<p> <a href="../classes/terminal_equity.html#TerminalEquity:set_board">set_board</a> must be called before this function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ranges</span>
+         a 2xK tensor containing ranges for each player (where K is the range size)
+        </li>
+        <li><span class="parameter">result</span>
+         a 2xK tensor in which to store the cfvs for each player
+        </li>
+        <li><span class="parameter">folding_player</span>
+         which player folded
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

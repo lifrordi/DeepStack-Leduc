@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><strong>constants</strong></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>constants</code></h1>
+<p>Various constants used in DeepStack.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#players">players</a></td>
+	<td class="summary">IDs for each player and chance</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#node_types">node_types</a></td>
+	<td class="summary">IDs for terminal nodes (either after a fold or call action) and nodes that follow a check action</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#actions">actions</a></td>
+	<td class="summary">IDs for fold and check/call actions</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#acpc_actions">acpc_actions</a></td>
+	<td class="summary">String representations for actions in the ACPC protocol</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#players_count">players_count</a></td>
+	<td class="summary">the number of players in the game</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#streets_count">streets_count</a></td>
+	<td class="summary">the number of betting rounds in the game</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "players"></a>
+    <strong>players</strong>
+    </dt>
+    <dd>
+    IDs for each player and chance
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">chance</span>
+         <code>0</code>
+        </li>
+        <li><span class="parameter">P1</span>
+         <code>1</code>
+        </li>
+        <li><span class="parameter">P2</span>
+         <code>2</code>
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "node_types"></a>
+    <strong>node_types</strong>
+    </dt>
+    <dd>
+    IDs for terminal nodes (either after a fold or call action) and nodes that follow a check action
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">terminal_fold</span>
+         (terminal node following fold) <code>-2</code>
+        </li>
+        <li><span class="parameter">terminal_call</span>
+         (terminal node following call) <code>-1</code>
+        </li>
+        <li><span class="parameter">chance_node</span>
+         (node for the chance player) <code>0</code>
+        </li>
+        <li><span class="parameter">check</span>
+         (node following check) <code>-1</code>
+        </li>
+        <li><span class="parameter">inner_node</span>
+         (any other node) <code>2</code>
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "actions"></a>
+    <strong>actions</strong>
+    </dt>
+    <dd>
+    IDs for fold and check/call actions
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">fold</span>
+         <code>-2</code>
+        </li>
+        <li><span class="parameter">ccall</span>
+         (check/call) <code>-1</code>
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "acpc_actions"></a>
+    <strong>acpc_actions</strong>
+    </dt>
+    <dd>
+    String representations for actions in the ACPC protocol
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">fold</span>
+         "<code>fold</code>"
+        </li>
+        <li><span class="parameter">ccall</span>
+         (check/call) "<code>ccall</code>"
+        </li>
+        <li><span class="parameter">raise</span>
+         "<code>raise</code>"
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "players_count"></a>
+    <strong>players_count</strong>
+    </dt>
+    <dd>
+    the number of players in the game
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "streets_count"></a>
+    <strong>streets_count</strong>
+    </dt>
+    <dd>
+    the number of betting rounds in the game
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

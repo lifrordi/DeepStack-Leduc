@@ -1,0 +1,42 @@
+#############################################################
+# Please fill out the following information about your team 
+#############################################################
+
+Team Name:
+Agent Name (can be the same as team name):
+
+For each team member, please list the following:
+Name, Team leader (y/n)?, e-mail, Academic (y/n, position - e.g., PhD student)?, University/Business affiliation, Location (city, province/state, country)
+
+Was this submission part of an academic class project?  What level of class
+(undergraduate/graduate)?
+
+
+###########################################################################
+# Please provide as much information about your agent as possible as the
+# competition organizers are very interested in knowing more about the
+# techniques used by our competitors.
+###########################################################################
+
+1) Is your agent dynamic?  That is, does its strategy change throughout the
+course of a match, or is the strategy played the same throughout the match?
+
+2) Does your agent use a (approximate) Nash equilibrium strategy?
+
+3) Does your agent attempt to model your opponents?  If so, does it do so
+online during the competition or offline from data (e.g., using logs of play or
+the benchmark server)?
+
+4) Does your agent use techniques that would benefit from additional CPU time
+during the competition?
+
+5) Does your agent use techniques that would benefit from additional RAM during
+the competition?
+
+6) Would you agent benefit from additional disk space?
+
+One/Two Paragraph Summary of Technique
+
+
+References to relevant papers, if any
+

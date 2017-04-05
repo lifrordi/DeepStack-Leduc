@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><strong>bucket_conversion</strong></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/tutorial.md.html">tutorial</a></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>bucket_conversion</code></h1>
+<p>Converts between vectors over private hands and vectors over buckets.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#BucketConversion:__init">BucketConversion:__init ()</a></td>
+	<td class="summary">Constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BucketConversion:set_board">BucketConversion:set_board (board)</a></td>
+	<td class="summary">Sets the board cards for the bucketer.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BucketConversion:card_range_to_bucket_range">BucketConversion:card_range_to_bucket_range (card_range, bucket_range)</a></td>
+	<td class="summary">Converts a range vector over private hands to a range vector over buckets.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BucketConversion:bucket_value_to_card_value">BucketConversion:bucket_value_to_card_value (bucket_value, card_value)</a></td>
+	<td class="summary">Converts a value vector over buckets to a value vector over private hands.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BucketConversion:get_possible_bucket_mask">BucketConversion:get_possible_bucket_mask ()</a></td>
+	<td class="summary">Gives a vector of possible buckets on the the board.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "BucketConversion:__init"></a>
+    <strong>BucketConversion:__init ()</strong>
+    </dt>
+    <dd>
+    Constructor
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BucketConversion:set_board"></a>
+    <strong>BucketConversion:set_board (board)</strong>
+    </dt>
+    <dd>
+    Sets the board cards for the bucketer.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">board</span>
+         a non-empty vector of board cards
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BucketConversion:card_range_to_bucket_range"></a>
+    <strong>BucketConversion:card_range_to_bucket_range (card_range, bucket_range)</strong>
+    </dt>
+    <dd>
+    Converts a range vector over private hands to a range vector over buckets. </p>
+
+<p> <a href="../classes/bucket_conversion.html#BucketConversion:set_board">set_board</a> must be called first. Used to create inputs to the neural net.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">card_range</span>
+         a probability vector over private hands
+        </li>
+        <li><span class="parameter">bucket_range</span>
+         a vector in which to save the resulting probability
+ vector over buckets
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BucketConversion:bucket_value_to_card_value"></a>
+    <strong>BucketConversion:bucket_value_to_card_value (bucket_value, card_value)</strong>
+    </dt>
+    <dd>
+    Converts a value vector over buckets to a value vector over private hands. </p>
+
+<p> <a href="../classes/bucket_conversion.html#BucketConversion:set_board">set_board</a> must be called first. Used to process neural net outputs.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bucket_value</span>
+         a vector of values over buckets
+        </li>
+        <li><span class="parameter">card_value</span>
+         a vector in which to save the resulting vector of values
+ over private hands
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BucketConversion:get_possible_bucket_mask"></a>
+    <strong>BucketConversion:get_possible_bucket_mask ()</strong>
+    </dt>
+    <dd>
+    Gives a vector of possible buckets on the the board. </p>
+
+<p> <a href="../classes/bucket_conversion.html#BucketConversion:set_board">set_board</a> must be called first.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a mask vector over buckets where each entry is 1 if the bucket is
+ valid, 0 if not
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

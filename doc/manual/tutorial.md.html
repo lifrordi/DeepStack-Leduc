@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>DeepStack for Leduc Hold'em</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>DeepStack Leduc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Code_Structure">Code Structure </a></li>
+<li><a href="#Trees">Trees </a></li>
+<li><a href="#Solving_a_Tree">Solving a Tree </a></li>
+<li><a href="#ACPC_Server">ACPC Server </a></li>
+<li><a href="#GPU_Support">GPU Support </a></li>
+<li><a href="#Creating_Your_Own_Models">Creating Your Own Models </a></li>
+</ul>
+
+
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><strong>tutorial</strong></li>
+  <li><a href="../manual/internals.md.html">internals</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/data_generation.html">data_generation</a></li>
+  <li><a href="../modules/data_generation_call.html">data_generation_call</a></li>
+  <li><a href="../modules/random_card_generator.html">random_card_generator</a></li>
+  <li><a href="../modules/evaluator.html">evaluator</a></li>
+  <li><a href="../modules/card_to_string_conversion.html">card_to_string_conversion</a></li>
+  <li><a href="../modules/card_tools.html">card_tools</a></li>
+  <li><a href="../modules/net_builder.html">net_builder</a></li>
+  <li><a href="../modules/arguments.html">arguments</a></li>
+  <li><a href="../modules/constants.html">constants</a></li>
+  <li><a href="../modules/game_settings.html">game_settings</a></li>
+  <li><a href="../modules/train.html">train</a></li>
+  <li><a href="../modules/tools.html">tools</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/main_data_generation.html">main_data_generation</a></li>
+  <li><a href="../scripts/cpu_gpu_model_converter.html">cpu_gpu_model_converter</a></li>
+  <li><a href="../scripts/deepstack.html">deepstack</a></li>
+  <li><a href="../scripts/main_train.html">main_train</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/acpc_game.html">acpc_game</a></li>
+  <li><a href="../classes/network_communication.html">network_communication</a></li>
+  <li><a href="../classes/protocol_to_node.html">protocol_to_node</a></li>
+  <li><a href="../classes/range_generator.html">range_generator</a></li>
+  <li><a href="../classes/bet_sizing.html">bet_sizing</a></li>
+  <li><a href="../classes/cfrd_gadget.html">cfrd_gadget</a></li>
+  <li><a href="../classes/lookahead.html">lookahead</a></li>
+  <li><a href="../classes/lookahead_builder.html">lookahead_builder</a></li>
+  <li><a href="../classes/mock_resolving.html">mock_resolving</a></li>
+  <li><a href="../classes/resolving.html">resolving</a></li>
+  <li><a href="../classes/bucket_conversion.html">bucket_conversion</a></li>
+  <li><a href="../classes/bucketer.html">bucketer</a></li>
+  <li><a href="../classes/masked_huber_loss.html">masked_huber_loss</a></li>
+  <li><a href="../classes/mock_nn_terminal.html">mock_nn_terminal</a></li>
+  <li><a href="../classes/next_round_value.html">next_round_value</a></li>
+  <li><a href="../classes/value_nn.html">value_nn</a></li>
+  <li><a href="../classes/continual_resolving.html">continual_resolving</a></li>
+  <li><a href="../classes/terminal_equity.html">terminal_equity</a></li>
+  <li><a href="../classes/data_stream.html">data_stream</a></li>
+  <li><a href="../classes/strategy_filling.html">strategy_filling</a></li>
+  <li><a href="../classes/tree_builder.html">tree_builder</a></li>
+  <li><a href="../classes/tree_cfr.html">tree_cfr</a></li>
+  <li><a href="../classes/tree_strategy_filling.html">tree_strategy_filling</a></li>
+  <li><a href="../classes/tree_values.html">tree_values</a></li>
+  <li><a href="../classes/tree_visualiser.html">tree_visualiser</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>Tutorial</h1>
+
+<p>This file introduces the user to the DeepStack codebase. After an initial
+overview of the codebase, it walks the user through a series of examples
+meant to illustrate the internal structure of DeepStack. If you are interested
+only in how to run DeepStack itself, you may skip to <a href="../manual/tutorial.md.html#ACPC_Server">here</a>.</p>
+
+<p><a name="Code_Structure"></a></p>
+<h2>Code Structure</h2>
+
+<p>DeepStack is written in <a href="https://www.lua.org/">Lua</a> using the <a href="http://torch.ch/">torch</a>
+scientific computing framework. The code files are in the <code>Source/</code> directory,
+divided into subdirectories based on purpose. All of the code uses relative
+paths, and thus will only work if you <strong>run torch from the <code>Source/</code> directory</strong>.</p>
+
+<p>The <code>Source/Game/</code> and <code>Source/TerminalEquity/</code> directories contain modules
+that implement aspects of poker games (e.g. handling private and public cards,
+evaluating terminal states). </p>
+
+<p>The <code>Source/Tree/</code> directory contains modules that build a tree representing
+all or part of a Leduc Hold'em game.</p>
+
+<p>The <code>Source/Lookahead/</code> directory uses a public tree to build a <strong>Lookahead</strong>,
+the primary game representation DeepStack uses for solving and playing games.
+A Lookahead efficiently stores data at the node and action level using
+<a href="https://github.com/torch/torch7/blob/master/doc/tensor.md">torch tensors</a>.
+When possible, tensors will be stored on the GPU, which will be used for
+computation.</p>
+
+<p>The <code>Source/DataGeneration/</code> directory contains code which solves random poker
+situations using Lookaheads and saves the results to disk. The code in
+<code>Source/Training/</code> uses this data to train a neural net. The code for directly
+interacting with the neural net is contained in <code>Source/Nn/</code>.</p>
+
+<p>The <code>Source/Player/</code> directory contains the code that implements the continual
+re-solving algorith during gameplay, as well as the DeepStack player object
+which connects to the server and runs the main DeepStack loop. Communication
+with the server is handled by the code in <code>Source/ACPC/</code>.</p>
+
+<p>The <code>Data/Models/</code> contains trained neural networks to be used during the continual resolving</p>
+
+<p>The <code>Data/Dot/</code> is where the images of trees are stored when you want to visualise them</p>
+
+<p><a name="Trees"></a></p>
+<h2>Trees</h2>
+<p>Tree is the simplest game representation used throughout the code. It can be
+used to visualise simple strategies, compute exploitabilities etc. The
+re-solving lookahead is also using tree.</p>
+
+<h3>Building a Simple Tree</h3>
+
+<p>Let's start with a simple tree for the second round of Leduc. The following
+code builds a game tree rooted at the first node of Leduc's second betting
+round, after the King of Spades has been dealt as a public card. Each player
+has committed 300 chips to the pot in the first betting round - note that the
+actual first round actions are not needed, and thus aren't specified.</p>
+
+
+<pre>
+<span class="keyword">local</span> builder = PokerTreeBuilder()
+
+<span class="keyword">local</span> params = {}
+
+params.root_node = {}
+params.root_node.board = card_to_string:string_to_board(<span class="string">'Ks'</span>)
+params.root_node.street = <span class="number">2</span>
+params.root_node.current_player = constants.players.P1
+params.root_node.bets = arguments.Tensor{<span class="number">300</span>, <span class="number">300</span>}
+
+<span class="keyword">local</span> tree = builder:build_tree(params)
+</pre>
+
+
+<p>you can find the full example in <code>Source/Tree/Test/test_tree_builder.lua</code>.
+To run the example, you need to run torch from the <code>Source/</code> directory.</p>
+
+<pre>
+th Tree/Tests/test_tree_builder.lua
+</pre>
+
+
+<p>If the code runs correctly, no output will be produced; it simply creates the
+tree and then exits. To look at the structure of the tree, we will need to
+use it to produce a visualisation.</p>
+
+<h3>Visualising a Tree</h3>
+
+<p>First, make sure you have <a href="http://graphviz.org/">graphviz</a> installed - if it is
+installed correctly, you will be able to run <code>dot -V</code> from a terminal.</p>
+
+<p>Once you have built a tree, you may print it into a file for further inspection.</p>
+
+
+<pre>
+<span class="keyword">local</span> visualiser = TreeVisualiser()
+visualiser:graphviz(tree, <span class="string">"tree1"</span>)
+</pre>
+
+<p><a href="tree1.png"><img src="tree1.png" alt="tree1" style="width: 500px;"/></a></p>
+
+<p>You can find the full example in <code>Source/Tree/Test/test_tree_visualiser.lua</code>.
+To run the example, you need to run torch from the <code>Source/</code> directory.</p>
+
+<pre>
+th Tree/Tests/test_tree_visualiser.lua
+</pre>
+
+
+<p>The resulting image (in <code>Data/Dot/tree1.svg</code> shows the structure in the tree,
+such as current bets and the strategies in all of the nodes.</p>
+
+<h3>Bet Sizing</h3>
+<p>The tree that you just produced only contains <code>fold</code>, <code>call</code>, <code>pot bet</code> and
+<code>all-in</code> actions. To change what bet sizes are used in the tree, open
+<code>Source/Settings/arguments.lua</code>. The file contains multiple arguments you can
+change, including <code>params.bet_sizing = {1}</code> which specifies the allowed bet
+sizes.  Try changing it into <code>params.bet_sizing = {1, 2}</code> to allow not only
+pot-sized bets,  but also bets of twice the pot size. To see the results, run</p>
+
+<pre>
+th Tree/Tests/test_tree_visualiser.lua
+</pre>
+
+<p>again.</p>
+
+<p>These bet sizes will limit the options the agent considers when making an
+action during the game. Note that this does <strong>not</strong> limit the agent from
+understanding any other bet size the opponent can make.
+This is a key property of the DeepStack algorithm (continual re-solving),
+where the re-solving starts in the exact game node (thus DeepStack perfectly
+understands the pot size, possible hands, etc.).</p>
+
+<p><a name="Solving_a_Tree"></a></p>
+<h2>Solving a Tree</h2>
+
+<p>When we build a simple tree, the strategy in each node is random.</p>
+
+<h3>Computing Exploitability</h3>
+
+<p>Since the initial strategy in the tree is random, let's see how good the
+strategy actually is. To do that, we need to compute the <code>exploitability</code> of
+the strategy</p>
+
+
+<pre>
+<span class="keyword">local</span> tree_values = TreeValues()
+tree_values:compute_values(tree)
+
+<span class="global">print</span>(<span class="string">'Exploitability: '</span> .. tree.exploitability .. <span class="string">' [chips]'</span>)
+</pre>
+
+<p>you can find the full example in <code>Source/Tree/Test/test_tree_values.lua</code>.
+To run the example, you need to run torch from the <code>Source/</code> directory.</p>
+
+<pre>
+th Tree/Tests/test_tree_values.lua
+</pre>
+
+
+<p>You should see an exploitability a bit over <strong>175 chips</strong>. This means that
+a worst-case opponent can beat the random strategy for an average of 175 chips
+every hand; unsurprisingly, a random strategy is very bad.</p>
+
+<p>Next, we will try to fill the tree with a better strategy.</p>
+
+<h3>Tree CFR</h3>
+
+<p>One way to compute a better strategy for the tree is to run Counterfactual
+Regret Minimization (CFR) on the tree. If the tree is small (like our example
+tree), we can efficiently run the algorithm directly on the tree. Let's do
+that.</p>
+
+
+<pre>
+<span class="keyword">local</span> starting_ranges = arguments.Tensor(constants.players_count, constants.card_count)
+
+starting_ranges[<span class="number">1</span>]:copy(card_tools:get_uniform_range(board))
+starting_ranges[<span class="number">2</span>]:copy(card_tools:get_uniform_range(board))
+
+<span class="keyword">local</span> tree_cfr = TreeCFR()
+tree_cfr:run_cfr(tree, starting_ranges)
+</pre>
+
+
+<p>you can find the full example in <code>Source/Tree/Test/test_tree_cfr.lua</code>
+To run the example, you need to run torch from the <code>Source/</code> directory.</p>
+
+
+<pre>
+th Tree/Tests/test_tree_cfr.lua
+</pre>
+
+
+<p>After 1,000 iterations of CFR, the exploitability of the resulting strategy
+should be about <strong>1.0 chips</strong>. This is much better than the random strategy!
+Note that you can change the number of iterations in
+<code>Source/Settings/arguments.lua</code>, look for the <code>params.cfr_iters</code> and
+<code>params.cfr_skip_iters</code> settings.</p>
+
+<h3>Continual Re-solving in Tree</h3>
+
+<p>While the CFR is a great algorithm that can solve very large trees, if the tree
+is huge (as in no-limit poker), we can't do even a single tree traversal.
+That's where DeepStack comes in with the continual re-solving and depth-limited
+search. While DeepStack can run on huge trees such as no-limit poker, we can
+also run it on our simple example tree to see what it does.</p>
+
+
+<pre>
+<span class="keyword">local</span> filling = TreeStrategyFilling()
+
+<span class="keyword">local</span> range1 = card_tools:get_uniform_range(board)
+<span class="keyword">local</span> range2 = card_tools:get_uniform_range(board)
+
+filling:fill_strategies(tree, <span class="number">1</span>, range1, range2)
+filling:fill_strategies(tree, <span class="number">2</span>, range1, range2)
+</pre>
+
+
+<p>You can find the full example in <code>Source/Tree/Test/test_tree_strategy_filling.lua</code>.</p>
+
+
+<pre>
+th Tree/Tests/test_tree_strategy_filling.lua
+</pre>
+
+
+<p>You shold see a number around <strong>1.37 chips</strong>. While this is slightly worse than
+running CFR for 1,000 iterations, DeepStack never traverses the entire tree when
+computing the strategy for any node! When re-solving nodes on the first street,
+we estimate the values at the end of the street using a neural network.</p>
+
+<p>Note that we traverse the tree and in each node perform continual re-solving,
+first for the first player, and then for the second player. While re-solving
+the nodes on the first street, it internally uses a pre-computed neural network.</p>
+
+<p>This is of course a very simple tree for which we can run DeepStack in every
+node of the tree and consequently compute DeepStack's exact strategy for the
+game. But since DeepStack does not traverse the full tree, we can run it on
+much much larger games than CFR.</p>
+
+<p>To run DeepStack on the full game, we will need to actually play the game in a
+dynamic fashion (randomly dealt cards, two players each choosing actions
+depending on the current state), which requires the ACPC server. </p>
+
+<p><a name="ACPC_Server"></a></p>
+<h2>ACPC Server</h2>
+
+<p>Now let's see how to play the game versus an opponent using the ACPC dealer and
+ACPC protocol. The latest ACPC software can be always found <a href="http://www.computerpokercompetition.org/downloads/code/competition_server/">here</a>,
+but we already included all you need to run Leduc in the <code>ACPCServer/</code> directory.
+Open the directory and build the server executable by running</p>
+
+
+<pre>
+make
+</pre>
+
+
+
+<h3>ACPC Dealer</h3>
+
+<p>The ACPC dealer is the program that the players talk to over the network using
+the ACPC protocol. It deals the cards, determines the winner, etc. - just like
+a real dealer does. To start the dealer to play 100 leduc hands and to listen
+for the players on ports 20000 and 20001, run</p>
+
+
+<pre>
+./dealer test leduc.game <span class="number">100</span> <span class="number">42</span> player1 player2 -p <span class="number">20000</span>,<span class="number">20001</span>
+</pre>
+
+<p>in the <code>ACPCServer/</code> directory.</p>
+
+<p>You can get more details by running <code>./dealer</code> with no arguments.</p>
+
+
+<h3>ACPC Example Player</h3>
+
+<p>Now let's connect a dummy player to the running dealer.</p>
+
+
+<pre>
+./example_player leduc.game localhost <span class="number">20001</span>
+</pre>
+
+
+<p>Run this code in a separate process from the already running dealer.</p>
+
+<p>The example player simply acts randomly. Connect annother example player to
+port 20000 (run <code>./example_player leduc.game localhost 20000</code> in a third
+process) and look at the dealer's output. You should see 100 hands played, and
+at the end, the cumulative winnings of the players. Note that for both
+<code>./dealer</code> and <code>./example_player</code> we specified <code>leduc.game</code> - this file defines
+that we are playing the game of Leduc hold'em. The ACPC dealer can run other
+poker games as well.</p>
+
+<h3>DeepStack Player</h3>
+
+<p>Now let's connect DeepStack as a player.</p>
+
+<h4>Running the Player</h4>
+
+<p>The script that runs the player is in <code>Source/Player/deepstack.lua</code>. To connect
+DeepStack as one of the players to the dealer, open <code>Source/Settings/arguments.lua</code>
+and set <code>acpc_server = "localhost"</code> and <code>acpc_server_port = 20000</code>.
+Then you can run the player</p>
+
+
+<pre>
+th Player/deepstack.lua
+</pre>
+
+
+<h4>How it Works</h4>
+
+<p>DeepStack can also serve as an ACPC player. It's important to understand the
+high-level idea and structure of the code.
+DeepStack computes the strategy via continual re-solving with a depth limited
+search. As we saw for the simple tree, we can run the DeepStack algorithm in a
+tree by traversing all of the paths. When playing via ACPC, we re-solve on the
+path that is being played. The node we are currently in as well as the actions
+that led to the node are included in the ACPC protocol. The API for continual
+re-solving can be found in <code>Source/Lookahead/resolving.lua</code>. This API is used
+both while traversing a simple tree (<code>Source/Tree/tree_strategy_filling.lua</code>)
+and when running the DeepStack algorithm during the ACPC gameplay
+(<code>Source/Player/continual_resolving.lua</code>).</p>
+
+<p><a name="GPU_Support"></a></p>
+<h2>GPU Support</h2>
+
+<p>The solver <code>Source/Lookahead/lookahead.lua</code> internally uses torch tensors, and
+can do all of the computation on the GPU. First, you need to install
+<a href="https://github.com/torch/cutorch">cutorch</a>.
+Important! This code is written for version 1.0 so please install with </p>
+
+
+<pre>
+luarocks install cutorch <span class="number">1.0</span>-<span class="number">0</span>
+</pre>
+
+
+<p>Once installed, you can make
+DeepStack run on gpu by setting <code>params.gpu = true</code> in <code>Source/Settings/arguments.lua</code>.</p>
+
+<p>If you try to run DeepStack for Leduc on a GPU, it will actually run slower
+than it does on a CPU. This is because Leduc is such a small game; for Texas
+hold'em, there are more than 1,000 hands in each range vector, so the
+corresponding tensors are much larger, which allows the GPU to perform
+efficient parallel computation. On the other hand, Leduc has only 6 possible
+hands in each range vector. Note that the solver is written in a GPU-friendly
+manner, and for large games, the solver runs <strong>much</strong> faster on a GPU.</p>
+
+<p><a name="Creating_Your_Own_Models"></a></p>
+<h2>Creating Your Own Models</h2>
+
+<p>If you followed this tutorial, you played deepstack using a neural net model
+included in the repository. There is also code for you to train your own neural
+network, so let's do that now.</p>
+
+<h3>Data Generation</h3>
+<p>First, you need to generate and solve random poker situations that will form
+the data set for training. Generating more training data is the easiest way to
+get better performance from the neural network (the pretrained network that we
+included for you was trained on 1,000,000 data points).</p>
+
+<p>The script that handles data generation can be found in <code>Source/DataGeneration/main_data_generation.lua</code>.
+You should see something like</p>
+
+
+<pre>
+data_generation:generate_data(arguments.train_data_count, arguments.valid_data_count)
+</pre>
+
+
+<p>Again, you can set these in <code>Source/Settings/arguments.lua</code>.
+Let's start small and generate 100 training and 100 validation examples.
+Set the corresponding arguments and then run the script.</p>
+
+
+<pre>
+th DataGeneration/main_data_generation.lua
+</pre>
+
+
+<p>Once the script finishes, you will find your data in <code>Data/TrainSamples/PotBet</code>.</p>
+
+<p>Note that the betting abstraction used for the data generation is the same as
+the one DeepStack uses during play (defined by the <code>params.bet_sizing</code> argument
+that we discussed earlier). So you can easily generate data using different
+betting abstractions, which is another way to potentially improve neural net
+performance.</p>
+
+<h3>Training Your Model</h3>
+<p>Now let's train your neural network model on the data you just generated.
+First, check the neural net architecture defined as <code>params.net</code> in <code>Source/Settings/arguments.lua</code>.
+You should see something like:</p>
+
+
+<pre>
+params.net = <span class="string">'{nn.Linear(input_size, 50), nn.PReLU(), nn.Linear(50, output_size)}'</span>
+</pre>
+
+<p>This defines a net with two hidden layers, each of which contains 50 neurons.
+Between the layers is a <a href="https://arxiv.org/abs/1502.01852">parameteric rectified linear unit</a>
+transfer function.</p>
+
+<p>The pre-trained net also had 50 neurons per layer, but had 5 hidden layers. The
+more data you generate, the bigger your net will probably need to be to
+accurately learn the data.</p>
+
+<p>Further training parameters can also be found in the arguments (e.g. learning rate).</p>
+
+<p>Now, the script that runs the training is <code>Source/Training/main_train.lua</code> so try running it.</p>
+
+
+<pre>
+th Training/main_train.lua
+</pre>
+
+
+<p>You should see output with training and validation loss after each epoch. The
+models are saved in <code>Data/Models/PotBet</code>. The frequency of saving depends on
+the <code>params.save_epoch</code> argument in <code>Source/Settings/arguments.lua</code>.</p>
+
+<h3>Using Your Model in DeepStack</h3>
+<p>Now you have your model, you know the validation error, and you wonder how well
+it actually plays. Simply open <code>Source/Settings/arguments.lua</code> and change <code>params.value_net_name</code>
+from <code>'final'</code> to the name of the model you want to use, such as <code>'epoch_10'</code>.</p>
+
+<p>That's it! Now you can run again</p>
+
+<pre>
+th Tree/Tests/test_tree_strategy_filling.lua
+</pre>
+
+<p>to re-solve the small tree and see the exploitability of your new model.</p>
+
+<h3>Moving a Model between CPU and GPU</h3>
+
+<p>If you trained your model on the GPU, but want to run DeepStack on a machine
+that has no GPU, you need to convert the model. There is a simple script
+<code>Source/Nn/cpu_gpu_model_converter.lua</code> that does exactly that. It also
+contains a function for converting from a CPU model to a GPU model, if you
+need to do the conversion the other way.</p>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-04 17:03:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
