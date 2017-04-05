@@ -40,8 +40,8 @@ installed as part of the standard torch distribution) using the command
 `luarocks install luasocket`. Visualising the trees produced by DeepStack
 requires the [graphviz](http://graphviz.org/) package, which can be installed
 with `luarocks install graphviz`. Running the code on the GPU requires
-[cutorch](https://github.com/torch/cutorch), which can be installed with
-`luarocks install cutorch`.
+[cutorch](https://github.com/torch/cutorch). Currently only version 1.0 is supported which can be installed with
+`luarocks install cutorch 1.0-0`.
 
 The DeepStack player uses the protocol of the Annual Computer Poker Competition
 (a description of the protocol can be found [here](http://www.computerpokercompetition.org/downloads/documents/protocols/protocol.pdf))
@@ -79,7 +79,7 @@ raises that can be made in each betting round.
 ## Documentation
 
 Documentation for the DeepStack Leduc codebase can be found [here](doc/index.html).
-In particular, there is [a tutorial](doc/manual/tutorial.md.html) which
+In particular, there is [a tutorial](doc/manual/tutorial.md) which
 introduces the codebase and walks you through several examples, including
 running DeepStack.
 
