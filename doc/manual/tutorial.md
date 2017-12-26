@@ -105,11 +105,21 @@ The tree that you just produced only contains `fold`, `call`, `pot bet` and
 `Source/Settings/arguments.lua`. The file contains multiple arguments you can
 change, including `params.bet_sizing = {1}` which specifies the allowed bet
 sizes.  Try changing it into `params.bet_sizing = {1, 2}` to allow not only
-pot-sized bets,  but also bets of twice the pot size. To see the results, run
+pot-sized bets, but also bets of twice the pot size. To see the results, run
 ```bash
 th Tree/Tests/test_tree_visualiser.lua
 ```
 again.
+
+Do not forget to also make stack sizes high enough so that actions `pot bet`, `2-pot bet`,
+`3-pot bet` etc. can take any effect. For example, in the previous case of
+`params.bet_sizing = {1, 2}`, the pot size after the first round is `300 + 300 = 600`,
+while the stack sizes are `1200`. Hence, a `2-pot bet` would be greater greater than 
+player's stack size of `1200`. We thus need to increase players' stack sizes, e.g.,
+```lua
+params.stack = 12000
+```
+in `Source/Settings/arguments.lua`. See [Issue #6](https://github.com/lifrordi/DeepStack-Leduc/issues/6) for more details.
 
 These bet sizes will limit the options the agent considers when making an
 action during the game. Note that this does **not** limit the agent from
