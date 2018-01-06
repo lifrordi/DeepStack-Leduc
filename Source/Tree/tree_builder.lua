@@ -178,11 +178,8 @@ end
 -- @local
 function PokerTreeBuilder:_get_children_nodes(parent_node)
 
-  --is this a transition call node (leading to a chance node)?
-  local call_is_transit = parent_node.current_player == constants.players.P2 and parent_node.bets[1] == parent_node.bets[2] and parent_node.street < constants.streets_count
-  
   local chance_node = parent_node.current_player == constants.players.chance
-  --transition call -> create a chance node
+  --terminal node has no children
   if parent_node.terminal then
     return {}
   --chance node
